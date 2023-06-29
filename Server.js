@@ -3,7 +3,8 @@ import colors from 'colors'; //colours laane ke liye thode se
 import dotenv from 'dotenv';  //Port ko private rkhne ke liye
 import morgan from 'morgan'; // provides logging functionality for HTTP requests. It logs information about incoming requests and outgoing responses, helping you to monitor and debug your application.
 import connectDB from './config/db.js'; //DB se connect and stuff
-import authRoute from './routes/authRoute.js'
+import authRoute from './routes/authRoute.js';
+
 //configure env
 dotenv.config();
 
