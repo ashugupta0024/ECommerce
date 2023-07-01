@@ -10,6 +10,7 @@ export const Register = () => {
 	const [password, setPassword] = useState("");
 	const [address, setAddress] = useState("");
 	const [phone, setPhone] = useState("");
+	const [answer, setAnswer] = useState("");
 	const navigate = useNavigate(); //hook hai isliye use kiya hai
 
 	//Form Function
@@ -19,7 +20,7 @@ export const Register = () => {
 			console.log("I am in");
 			const res = await axios.post(
 				`${process.env.REACT_APP_API}/api/v1/auth/register`, //authRoute aur Server.js dekho udhar apan ne handle kiya hai ise
-				{ name, email, password, phone, address }
+				{ name, email, password, phone, address, answer }
 			);
 			if (res.data.success) {
 				toast.success(res.data.message);
@@ -99,6 +100,19 @@ export const Register = () => {
 							className="form-control"
 							id="exampleInputEmail1"
 							placeholder="Phone"
+							required
+						/>
+					</div>
+					<div className="form-group">
+						<input
+							value={answer}
+							onChange={(e) => {
+								setAnswer(e.target.value);
+							}}
+							type="text"
+							className="form-control"
+							id="exampleInputEmail1"
+							placeholder="Which is your favourite Bollywood movie?"
 							required
 						/>
 					</div>

@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./AuthStyles.css";
 import { useAuth } from "../../context/auth";
 
-export const Login = () => {
+export const ForgotPassword = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate(); //hook hai isliye use kiya hai
