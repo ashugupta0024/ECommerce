@@ -8,7 +8,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix ./client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"" 
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "AyushGupta",
@@ -25,6 +25,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "react-helmet": "^6.1.0",
-    "react-icons": "^4.10.1"
+    "react-icons": "^4.10.1",
+    "slugify": "^1.6.6"
   }
 }

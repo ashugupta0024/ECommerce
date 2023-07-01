@@ -32,6 +32,18 @@ font-family: 'Poppins', sans-serif; */
   letter-spacing: 1.5px;
 }
 
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+
+.dropdown-menu li {
+  display: block;
+}
+
+
 /* =======FOOTER======= */
 .footer {
   background-color: #f6f4ed;

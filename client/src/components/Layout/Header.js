@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/auth";
-import toast  from "react-hot-toast";
+import toast from "react-hot-toast";
 export const Header = () => {
 	const [auth, setAuth] = useAuth();
 	const handleLogout = () => {
@@ -65,15 +65,36 @@ export const Header = () => {
 							) : (
 								//ternary operator
 								<>
-									<li className="nav-item">
+									<li classname="nav-item dropdown">
 										<NavLink
-											onClick={handleLogout}
-											to="/Login"
-											className="nav-link"
-											href="#"
+											className="nav-link dropdown-toggle"
+											role="button"
+											data-bs-toggle="dropdown"
+											aria-expanded="false"
 										>
-											Logout
+											{auth?.user.name}
 										</NavLink>
+										<ul className="dropdown-menu">
+											<li>
+												<NavLink
+													to={`/dashboard/${
+														auth?.user?.role === 1 ? "admin" : "user "
+													}`}
+													className="dropdown-item"
+												>
+													DashBoard
+												</NavLink>
+											</li>
+											<li>
+												<NavLink
+													onClick={handleLogout}
+													to="/Login"
+													className="dropdown-item"
+												>
+													Logout
+												</NavLink>
+											</li>
+										</ul>
 									</li>
 								</>
 							)}

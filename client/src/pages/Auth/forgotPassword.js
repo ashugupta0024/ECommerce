@@ -2,34 +2,26 @@ import React, { useState } from "react"; //UseState https://p.ip.fi/rWXR
 import { Layout } from "../../components/Layout/Layout";
 import axios from "axios"; //backEnd se link karne ke liye
 import toast from "react-hot-toast";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./AuthStyles.css";
-import { useAuth } from "../../context/auth";
 
 export const ForgotPassword = () => {
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [newPassword, setNewPassword] = useState("");
+	const [answer, setAnswer] = useState("");
 	const navigate = useNavigate(); //hook hai isliye use kiya hai
-	const location = useLocation();
-	const [auth, setAuth] = useAuth();
 
 	//Form Function
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			const res = await axios.post(
-				`${process.env.REACT_APP_API}/api/v1/auth/login`, //authRoute aur Server.js dekho udhar apan ne handle kiya hai ise
-				{ email, password }
+				`${process.env.REACT_APP_API}/api/v1/auth/forgot-password`, //authRoute aur Server.js dekho udhar apan ne handle kiya hai ise
+				{ email, newPassword, answer }
 			);
 			if (res.data.success) {
 				toast.success(res.data.message);
-				setAuth({
-					...auth,
-					user: res.data.user,
-					token: res.data.token,
-				});
-				localStorage.setItem("auth", JSON.stringify(res.data));
-				navigate(location.state || "/"); //Login page par navigate kra denge agr koi pichla page tha particular toh udhar kara dega
+				navigate("/login"); //Login page par navigate kra denge agr koi pichla page tha particular toh udhar kara dega
 			} else {
 				toast.error(res.data.error);
 			}
@@ -40,9 +32,9 @@ export const ForgotPassword = () => {
 	};
 
 	return (
-		<Layout title={"Register- SwiftBuy"}>
+		<Layout title={"ForgotPass- SwiftBuy"}>
 			<div className="form-container">
-				<h1>Login</h1>
+				<h1>Reset Password</h1>
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
 						<input
@@ -59,9 +51,22 @@ export const ForgotPassword = () => {
 					</div>
 					<div className="form-group">
 						<input
-							value={password}
+							value={answer}
 							onChange={(e) => {
-								setPassword(e.target.value);
+								setAnswer(e.target.value);
+							}}
+							type="text"
+							className="form-control"
+							id="exampleInputPassword1"
+							placeholder="Which is your favourite Bollywood Movie?"
+							required
+						/>
+					</div>
+					<div className="form-group">
+						<input
+							value={newPassword}
+							onChange={(e) => {
+								setNewPassword(e.target.value);
 							}}
 							type="password"
 							className="form-control"
@@ -70,17 +75,9 @@ export const ForgotPassword = () => {
 							required
 						/>
 					</div>
-					<div className="mb-3">
-						<button
-							type="submit"
-							className="btn btn-primary"
-							onClick={() => navigate("/forgot-Password")}
-						>
-							Forgot Password
-						</button>
-					</div>
+
 					<button type="submit" className="btn btn-primary">
-						Login
+						Reset Password
 					</button>
 				</form>
 			</div>

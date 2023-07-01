@@ -40,7 +40,7 @@ export const Login = () => {
 	};
 
 	return (
-		<Layout title={"Register- SwiftBuy"}>
+		<Layout title={"Login- SwiftBuy"}>
 			<div className="form-container">
 				<h1>Login</h1>
 				<form onSubmit={handleSubmit}>
