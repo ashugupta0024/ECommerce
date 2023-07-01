@@ -6,6 +6,7 @@ import connectDB from "./config/db.js"; //DB se connect and stuff
 import authRoute from "./routes/authRoute.js";
 import cors from "cors";
 import categoryRoutes from "./routes/CategoryRoutes.js";
+import productRoutes from "./routes/ProductRoutes.js";
 
 //configure env
 dotenv.config();
@@ -23,7 +24,8 @@ app.use(cors());
 
 //routes
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/category", categoryRoutes)
+app.use("/api/v1/category", categoryRoutes);
+app.use("/api/v1/product", productRoutes)
 
 //rest api
 app.get("/", (req, res) => {
