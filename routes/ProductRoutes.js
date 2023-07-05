@@ -9,7 +9,9 @@ import {
 	productFilterController,
 	productListController,
 	productPhotoController,
-    updateProductController,
+	searchProductController,
+	relatedProductController,
+	updateProductController,
 } from "../controllers/productController.js";
 import ExpressFormidable from "express-formidable";
 const router = express.Router();
@@ -47,12 +49,18 @@ router.put(
 );
 
 //Filter Product
-router.post('/product-filter',productFilterController)
+router.post("/product-filter", productFilterController);
 
 //Product Count
-router.get('/product-count', productCountController)
+router.get("/product-count", productCountController);
 
 //Products per page
-router.get('/product-list/:page', productListController)
+router.get("/product-list/:page", productListController);
+
+//Search Product
+router.get("/search/:keyword", searchProductController);
+
+//Similar Products
+router.get("/related-product/:pid/:cid", relatedProductController);
 
 export default router;

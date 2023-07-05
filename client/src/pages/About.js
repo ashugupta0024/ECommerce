@@ -30,11 +30,15 @@ export const About = () => {
 					Thank you for choosing SwiftBuy. We appreciate your trust and look
 					forward to serving you with the best products and services.
 				</p>
-        <div className="img-container">
-        <div className="img-about-centered">
-					<img className="img-about" src="/Logo.png" alt="Description of the image"/>
+				<div className="img-container">
+					<div className="img-about-centered">
+						<img
+							className="img-about"
+							src="/Logo.png"
+							alt="Description of the image"
+						/>
+					</div>
 				</div>
-        </div>
 			</div>
 		</Layout>
 	);

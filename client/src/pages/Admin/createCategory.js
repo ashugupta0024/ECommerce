@@ -77,11 +77,11 @@ export const CreateCategory = () => {
 	const handleDelete = async (pId) => {
 		try {
 			const { data } = await axios.delete(
-				`${process.env.REACT_APP_API}/api/v1/category/delete-category/${pId}`,
+				`${process.env.REACT_APP_API}/api/v1/category/delete-category/${pId}`
 			);
 			if (data.success) {
 				toast.success(`${name} is Deleted`);
-				
+
 				getAllCategory();
 			} else {
 				toast.error(data.message);
@@ -90,7 +90,6 @@ export const CreateCategory = () => {
 			toast.error("Something went wrong");
 		}
 	};
-
 
 	return (
 		<Layout title={"Dashboard-CreateCategory"}>
@@ -135,7 +134,12 @@ export const CreateCategory = () => {
 														>
 															Edit
 														</button>{" "}
-														<button className="btn btn-danger ms-2" onClick={()=>{handleDelete(c._id)}}>
+														<button
+															className="btn btn-danger ms-2"
+															onClick={() => {
+																handleDelete(c._id);
+															}}
+														>
 															Delete
 														</button>{" "}
 													</td>

@@ -225,8 +225,7 @@ export const productListController = async (req, res) => {
 	try {
 		const perPage = 6;
 		const page = req.params.page ? req.params.page : 1;
-		const products = await ProductModel
-			.find({})
+		const products = await ProductModel.find({})
 			.select("-photo")
 			.skip((page - 1) * perPage)
 			.limit(perPage)
@@ -240,6 +239,53 @@ export const productListController = async (req, res) => {
 		res.status(400).send({
 			success: false,
 			message: "error in per page ctrl",
+			error,
+		});
+	}
+};
+
+//Search Product
+export const searchProductController = async (req, res) => {
+	try {
+		const { keyword } = req.params;
+		const results = await ProductModel.find({
+			$or: [
+				{ name: { $regex: keyword, $options: "i" } },
+				{ description: { $regex: keyword, $options: "i" } },
+			],
+		}).select("-photo");
+		res.json(results);
+	} catch (error) {
+		console.log(error);
+		res.status(400).send({
+			success: false,
+			message: "Error In Search Product API",
+			error,
+		});
+	}
+};
+
+//Similar Products
+export const relatedProductController = async (req, res) => {
+	try {
+		const { pid, cid } = req.params;
+		const products = await ProductModel
+			.find({
+				category: cid,
+				_id: { $ne: pid },
+			})
+			.select("-photo")
+			.limit(3)
+			.populate("category");
+		res.status(200).send({
+			success: true,
+			products,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(400).send({
+			success: false,
+			message: "error while geting related product",
 			error,
 		});
 	}
