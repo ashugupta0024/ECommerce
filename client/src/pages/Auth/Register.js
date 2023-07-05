@@ -33,6 +33,7 @@ export const Register = () => {
 			toast.error("Something went wrong");
 		}
 	};
+	
 	return (
 		<Layout title={"Register- SwiftBuy"}>
 			<div className="form-container">
