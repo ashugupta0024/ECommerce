@@ -168,7 +168,9 @@ export const HomePage = () => {
 									<p className="card-text">₹ {p.price}</p>
 									<button
 										class="btn btn-primary ms-1"
-										onClick={() => navigate(`/product/${p.slug}`)}
+										onClick={() =>
+											navigate(`/product/${p.slug}`)
+										}
 									>
 										More Details
 									</button>

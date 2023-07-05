@@ -3,7 +3,10 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import SearchInput from "../Form/SearchInput";
+import useCategory from "../../hooks/useCategory";
+
 export const Header = () => {
+	const categories = useCategory();
 	const [auth, setAuth] = useAuth();
 	const handleLogout = () => {
 		setAuth({
@@ -40,17 +43,42 @@ export const Header = () => {
 					</button>
 					<div className="collapse navbar-collapse" id="navbarTogglerDemo02">
 						<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-							<SearchInput />
+							<div className="searchFrom">
+								<SearchInput />
+							</div>
 							<li className="nav-item">
 								<NavLink to="/" className="nav-link">
 									Home
 								</NavLink>
 							</li>
-							<li className="nav-item">
-								<NavLink to="/Category" className="nav-link">
-									Category
-								</NavLink>
+
+							<li className="nav-item dropdown">
+								<Link
+									className="nav-link dropdown-toggle"
+									to={"/categories"}
+									data-bs-toggle="dropdown"
+								>
+									Categories
+								</Link>
+								<ul className="dropdown-menu">
+									<li>
+										<Link className="dropdown-item" to={"/categories"}>
+											All Categories
+										</Link>
+									</li>
+									{categories?.map((c) => (
+										<li>
+											<Link
+												className="dropdown-item"
+												to={`/category/${c.slug}`}
+											>
+												{c.name}
+											</Link>
+										</li>
+									))}
+								</ul>
 							</li>
+
 							{!auth.user ? ( //Check krre user hai ki nahi
 								<>
 									<li className="nav-item">

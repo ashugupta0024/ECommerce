@@ -43,6 +43,10 @@ font-family: 'Poppins', sans-serif; */
   display: block;
 }
 
+.searchFrom{
+  margin-right: 3%;
+  margin-top: 0.5%;
+}
 
 /* =======FOOTER======= */
 .footer {
