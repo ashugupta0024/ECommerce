@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import "../styles/CartStyles.css";
 
 const CartPage = () => {
 	const [auth, setAuth] = useAuth();
@@ -81,24 +82,23 @@ const CartPage = () => {
 
 	return (
 		<Layout>
-			<div className="container">
+			<div className="cart-page">
 				<div className="row">
 					<div className="col-md-12">
-						<h1 className="text-center bg-light p-2">
-							{`Hello ${auth?.token && auth?.user?.name}`}
+						<h1 className="text-center p-2">
+							{`Hello ${auth?.token && auth?.user?.name} !`}
 						</h1>
 						<h4 className="text-center">
 							{cart?.length
 								? `You Have ${cart.length} items in your cart ${
-										auth?.token ? "" : "please login to checkout"
-								  }`
+										auth?.token ? "" : "please login to checkout"}`
 								: " Your Cart Is Empty"}
 						</h4>
 					</div>
 					<div className="col-md-6">
-						<h6 className="text-center">Cart</h6>
+						<h2 className="text-center">Cart</h2>
 						{cart?.map((p) => (
-							<div className="row mb-2 p-3 card flex-row">
+							<div className="row mb-2 p-3 card flex-row items">
 								<div className="col-md-4">
 									<img
 										src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
@@ -122,7 +122,7 @@ const CartPage = () => {
 							</div>
 						))}
 					</div>
-					<div className="col-md-4 p-3 text-center">
+					<div className="col-md-4 p-3 text-center items">
 						<h2>Cart Summary</h2>
 						<hr />
 						<p>Total | Checkout | Payment</p>

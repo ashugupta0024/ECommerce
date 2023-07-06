@@ -3,7 +3,9 @@ import { Layout } from "../../components/Layout/Layout";
 import axios from "axios"; //backEnd se link karne ke liye
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import "./AuthStyles.css";
+// import "./AuthStyles.css";
+import "../../styles/AuthStyles.css";
+
 export const Register = () => {
 	const [name, setName] = useState(""); //useState
 	const [email, setEmail] = useState("");
@@ -36,7 +38,7 @@ export const Register = () => {
 	
 	return (
 		<Layout title={"Register- SwiftBuy"}>
-			<div className="form-container">
+			<div className="form-container" style={{ minHeight: "73vh" }}>
 				<h1>Register</h1>
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">

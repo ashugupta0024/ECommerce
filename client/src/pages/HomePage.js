@@ -6,6 +6,8 @@ import { Prices } from "../components/Prices";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import { toast } from "react-hot-toast";
+import "../styles/Homepage.css";
+
 export const HomePage = () => {
 	const [cart, setCart] = useCart();
 	const navigate = useNavigate();
@@ -119,8 +121,16 @@ export const HomePage = () => {
 
 	return (
 		<Layout title={"SwiftBuy - All Products"}>
-			<div className="container-fluid row mt-3">
-				<div className="col-md-2">
+			{/* banner image */}
+			{/* <img
+				src="/images/banner.png"
+				className="banner-img"
+				alt="bannerimage"
+				width={"100%"}
+			/> */}
+			{/* banner image */}
+			<div className="container-fluid row mt-3 home-page">
+				<div className="col-md-2 filters">
 					<h4 className="text-center">Filter by Category</h4>
 					<div className="d-flex flex-column">
 						{categories?.map((c) => (
@@ -156,9 +166,9 @@ export const HomePage = () => {
 
 				<div className="col-md-9">
 					<h1 className="text-center">All Products</h1>
-					<div className="d-flex flex-wrap ml-4">
+					<div className="d-flex flex-wrap cards">
 						{products?.map((p) => (
-							<div className="card m-2" style={{ width: "18rem" }}>
+							<div className="card" style={{ width: "18rem" }}>
 								<img
 									src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
 									className="card-img-top"
@@ -167,7 +177,7 @@ export const HomePage = () => {
 								<div className="card-body">
 									<h5 className="card-title">{p.name}</h5>
 									<p className="card-text">{p.description.substring(0.3)}</p>
-									<p className="card-text">₹ {p.price}</p>
+									<p className="card-text card-price">₹ {p.price}</p>
 									<button
 										class="btn btn-primary ms-1"
 										onClick={() => navigate(`/product/${p.slug}`)}
@@ -175,7 +185,7 @@ export const HomePage = () => {
 										More Details
 									</button>
 									<button
-										class="btn btn-secondary ms-1"
+										class="btn btn-secondary ms-1 mt-1"
 										onClick={() =>
 											setCart(
 												[...cart, p],
@@ -193,10 +203,10 @@ export const HomePage = () => {
 							</div>
 						))}
 					</div>
-					<div className="m-2 p-3">
+					<div className="m-2 p-3 loadmore">
 						{products && products.length < total && (
 							<button
-								className="btn btn-warning"
+								className="btn btn-home btn-warning"
 								onClick={(e) => {
 									e.preventDefault();
 									setPage(page + 1);
