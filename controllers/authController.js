@@ -1,5 +1,6 @@
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
 import usermodel from "../models/usermodel.js";
+import ordermodel from "../models/orderModel.js";
 import JWT from "jsonwebtoken";
 // import usermodel from "../models/userModel";
 
@@ -194,6 +195,65 @@ export const updateProfileController = async (req, res) => {
 		res.status(400).send({
 			success: false,
 			message: "Error While Update profile",
+			error,
+		});
+	}
+};
+
+// Get orders list
+export const getOrdersController = async (req, res) => {
+	try {
+		const orders = await ordermodel
+			.find({})
+			.populate("products", "-photo")
+			.populate("buyer", "name")
+			.sort({ createdAt: "-1" });
+		res.json(orders);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({
+			success: false,
+			message: "Error WHile Geting Orders",
+			error,
+		});
+	}
+};
+
+//Get all orders
+export const getAllOrdersController = async (req, res) => {
+	try {
+		const orders = await ordermodel
+			.find({})
+			.populate("products", "-photo")
+			.populate("buyer", "name")
+			.sort({ createdAt: "-1" });
+		res.json(orders);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({
+			success: false,
+			message: "Error WHile Geting Orders",
+			error,
+		});
+	}
+};
+
+// Get order Status
+export const orderStatusController = async (req, res) => {
+	try {
+		const { orderId } = req.params;
+		const { status } = req.body;
+		const orders = await ordermodel.findByIdAndUpdate(
+			orderId,
+			{ status },
+			{ new: true }
+		);
+		res.json(orders);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({
+			success: false,
+			message: "Error While Updateing Order",
 			error,
 		});
 	}
