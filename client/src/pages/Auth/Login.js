@@ -3,7 +3,8 @@ import { Layout } from "../../components/Layout/Layout";
 import axios from "axios"; //backEnd se link karne ke liye
 import toast from "react-hot-toast";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./AuthStyles.css";
+// import "./AuthStyles.css";
+import "../../styles/AuthStyles.css";
 import { useAuth } from "../../context/auth";
 
 export const Login = () => {
@@ -41,11 +42,12 @@ export const Login = () => {
 
 	return (
 		<Layout title={"Login- SwiftBuy"}>
-			<div className="form-container">
+			<div className="form-container " style={{ minHeight: "75vh" }}>
 				<h1>Login</h1>
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
 						<input
+							style={{ marginTop: "3vh" }}
 							value={email}
 							onChange={(e) => {
 								setEmail(e.target.value);
@@ -59,6 +61,7 @@ export const Login = () => {
 					</div>
 					<div className="form-group">
 						<input
+							style={{marginTop: "3vh"}}
 							value={password}
 							onChange={(e) => {
 								setPassword(e.target.value);
@@ -72,6 +75,7 @@ export const Login = () => {
 					</div>
 					<div className="mb-3">
 						<button
+							style={{ marginTop: "3vh" }}
 							type="submit"
 							className="btn btn-primary"
 							onClick={() => navigate("/forgot-Password")}
@@ -79,7 +83,7 @@ export const Login = () => {
 							Forgot Password
 						</button>
 					</div>
-					<button type="submit" className="btn btn-primary">
+					<button style={{ marginTop: "1vh" }} type="submit" className="btn btn-primary">
 						Login
 					</button>
 				</form>
